@@ -8,8 +8,8 @@ Erster Text
 - [ ] Programm für Screenshots finden
 - [ ] Tag für HPI finden 
 - [ ] Wie zoomt man auf Mac mit shortcut 
-- [ ] änderungen in Github speichern
-
+- [x] änderungen in Github speichern
+- [ ] wie programmiert man auf dieser Website 
 
 ## Issues
 - control drag öffnet context menu (soll es nicht tun)
