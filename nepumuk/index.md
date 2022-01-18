@@ -8,13 +8,15 @@ Erster Text
 
 - [x] Github Account einrichten 
 - [x] Programm für Screenshots finden
-- [ ] Tag für HPI finden 
+- [x] Tag für HPI finden 
 - [x] Wie zoomt man auf Mac mit shortcut  
 - [x] änderungen in Github speichern
-- [ ] wie programmiert man auf dieser Website 
-- [ ] Wiki Artikel html javascript markdown 
-- [ ] Wiki Artikel Reversi-Spiel 
-
-
+- [x] wie programmiert man auf dieser Website 
+- [x] Wiki Artikel html javascript markdown 
+- [x] Wiki Artikel Reversi-Spiel 
+- [ ] genaues alter per JavaScript berechnen
+- [ ] Was sind html Elemente.
+- [ ] Was ist eine UI?
+- [ ] Wie viele Tage bin ich alt?
 ## Issues
 - control drag öffnet context menu (soll es nicht tun)
