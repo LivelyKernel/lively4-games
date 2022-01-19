@@ -15,8 +15,8 @@ Erster Text
 - [x] Wiki Artikel html javascript markdown 
 - [x] Wiki Artikel Reversi-Spiel 
 - [ ] genaues alter per JavaScript berechnen
-- [ ] Was sind html Elemente.
-- [ ] Was ist eine UI?
+- [x] Was sind html Elemente.
+- [x] Was ist eine UI?
 - [ ] Wie viele Tage bin ich alt?
 ## Issues
 - control drag öffnet context menu (soll es nicht tun)
