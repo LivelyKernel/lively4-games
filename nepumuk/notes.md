@@ -135,7 +135,65 @@ return age_year
 </table>
 
 
+```javascript
+let born_day = 7 ;
+let born_month = 6 ;
+let born_year = 2007 ;
+let today_day = 19 ;
+let today_month = 1 ;
+let today_year = 2022 ;
+born_day=born_day+1 
+```
 
 
+ # Code der komisch aussieht
+ 
+```javascript
+
+function daysInMonth(month) {
+  //lively.notify(month)
+  if (month)== 1)
+    return 31
+  if (month == 2)
+    return 28
+  if (month == 3)
+    return 31 
+  if (month == 4)
+    return 30
+  if (month == 5)
+    return 31
+  if (month == 6)
+    return 30
+  if (month == 7)
+    return 31 
+  if (month == 8)
+    return 31
+  if (month == 9)
+    return 30
+  if (month == 10)
+    return 31
+  if (month == 11)
+    return 30
+  if (month == 12)
+    return 31
+} 
+
+```
+
+Und das sieht besser aus:
+ 
+ ```javascript
+
+function daysInMonth(month) {
+  // leap years are ignored (for now)
+  var days = [31,28,31,30,31,30,31,31,30,31,30,31]
+  return days[month-1]
+} 
+
+
+
+```
+ 
+ 
 
 
