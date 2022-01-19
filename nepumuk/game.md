@@ -12,13 +12,23 @@
   </div>
 
 
-  for(var i=0; i<16; i++) {
-    for(var j=0; j<16; j++) {
+  for(var i=0; i<8; i++) {
+    for(var j=0; j<8; j++) {
 
-      let field = <div class="field" style="position: absolute; top: 10px; left: 10px; width: 30px; height: 30px; background-color: gray"></div>
-      lively.setPosition(field, lively.pt(10 + j*40 , 10 + i*40))
+      let field = <div class="field" style="position: absolute; top: 10px; left: 10px; width: 50px; height: 50px; background-color: gray"></div>
+      lively.setPosition(field, lively.pt(10 + j*60 , 10 + i*60))
 
-      field.style.backgroundColor = `rgb(${i * 13},${j * 13},0)`
+      // field.style.backgroundColor = `rgb(${i * 13},${j * 13},0)`
+
+      field.addEventListener("click", evt => {
+          if (field.style.backgroundColor === "white") {
+            field.style.backgroundColor = "black"
+          } else {
+            field.style.backgroundColor = "white"
+          
+          } 
+      
+      })
 
       
       pane.appendChild(field)
