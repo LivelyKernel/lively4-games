@@ -18,5 +18,8 @@ Erster Text
 - [x] Was sind html Elemente.
 - [x] Was ist eine UI?
 - [x] Wie viele Tage bin ich alt?
+- [ ] anfangs Cords Regel
+- [ ] 32 moves Regel
+- [ ] umdreh Regel 
 ## Issues
 - control drag öffnet context menu (soll es nicht tun)

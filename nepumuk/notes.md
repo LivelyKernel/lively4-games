@@ -202,3 +202,55 @@ function daysInMonth(month) {
  
 
 
+## More JavaScript
+
+
+```javascript
+
+var a = 0
+var s = ""
+
+// iterate with a loop
+for(var i=0; i<7; i++) {
+  s += " " + i
+  a += i
+}
+
+a = "Hallo"
+
+var c = [1,2,3]
+
+var b = {f: 3}
+
+var d = function() { }
+
+
+function f(x, y) {
+  return x * y
+}
+
+// recursion
+function f(x) {
+  if (x == 0) {
+    return 0
+  }
+  return x + f(x - 1)
+}
+
+
+f(0)
+f(1)
+f(2) 
+f(3)
+f(4)
+
+
+```
+
+
+
+
+
+
+
+
