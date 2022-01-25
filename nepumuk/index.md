@@ -21,5 +21,6 @@ Erster Text
 - [ ] anfangs Cords Regel
 - [ ] 32 moves Regel
 - [ ] umdreh Regel 
+- [ ] reversi spielen 
 ## Issues
 - control drag öffnet context menu (soll es nicht tun)
