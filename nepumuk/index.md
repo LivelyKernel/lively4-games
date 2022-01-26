@@ -18,9 +18,10 @@ Erster Text
 - [x] Was sind html Elemente.
 - [x] Was ist eine UI?
 - [x] Wie viele Tage bin ich alt?
-- [ ] anfangs Cords Regel
-- [ ] 32 moves Regel
-- [ ] umdreh Regel 
-- [ ] reversi spielen 
+- [x] anfangs Cords Regel
+- [x] 32 moves Regel
+- [x] umdreh Regel 
+- [x] reversi spielen 
+- [ ] fixen das außenliegender Ring nich benutzt werden kann.
 ## Issues
 - control drag öffnet context menu (soll es nicht tun)

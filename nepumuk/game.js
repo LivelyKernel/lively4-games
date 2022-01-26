@@ -66,7 +66,10 @@ export class Game {
   // returns true when finished
   gatherFieldsThatWouldTurnColor(color, a, b, i, j, result) {
     var otherField = this.getField(i, j)
-    lively.showElement(otherField)
+    if (otherField=== undefined){
+      return []
+    }
+    // lively.showElement(otherField)
     var otherColor = this.fieldColor(otherField)
     if (otherColor == color) {
       return true
@@ -119,33 +122,55 @@ export class Game {
    fieldsThatWouldTurnColorTopLeft(color, a, b) {
     var result = []
 
-    // HOMEWORK
-    
+
+    var step = 0
+    var i = a
+    var j = b 
+    while(step++ < 8) {
+      i++
+      j++
+      if (this.gatherFieldsThatWouldTurnColor(color, a, b, i, j, result)) return result
+    }      
     return result
   }
 
   fieldsThatWouldTurnColorTopRight(color, a, b) {
     var result = []
-
-    // HOMEWORK
-    
+    var step = 0
+    var i = a
+    var j = b
+    while(step++ <8){
+      i--
+      j--
+      if (this.gatherFieldsThatWouldTurnColor(color, a, b, i, j, result)) return result
+    }
     return result
   }
 
   fieldsThatWouldTurnColorBottomLeft(color, a, b) {
     var result = []
-
-    // HOMEWORK
-    
+    var step = 0
+    var i = a
+    var j = b
+    while(step++ >= 0){
+      i--
+      j++
+      if (this.gatherFieldsThatWouldTurnColor(color, a, b, i, j, result)) return result
+    }
     return result
   }
   
   
   fieldsThatWouldTurnColorBottomRight(color, a, b) {
     var result = []
-
-    // HOMEWORK
-    
+    var step = 0
+    var i = a
+    var j = b
+    while(step++ >= 0){
+      i++
+      j--
+      if (this.gatherFieldsThatWouldTurnColor(color, a, b, i, j, result)) return result
+    }
     return result
   }
 
@@ -286,7 +311,11 @@ export class Game {
 }
 
 
-
+ // TIP i++ oder j++
+      // altermativ
+      // for(var j = b + 1; j < 8; j++) {
+      // UND i++
+      // while(step++ < 8) {
 
 
 
