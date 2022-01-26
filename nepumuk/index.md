@@ -22,6 +22,13 @@ Erster Text
 - [x] 32 moves Regel
 - [x] umdreh Regel 
 - [x] reversi spielen 
-- [ ] fixen das außenliegender Ring nich benutzt werden kann.
+- [x] fixen das außenliegender Ring nich benutzt werden kann.
+- [ ] undefined fehler bei auto turn
+- [x] save player moves current player
+- [ ] fix moves left 
+- [ ] button endless game 
+- [ ] keiner kann mehr ziehen game over
+- [ ] game editor mode 
+- [ ] zug rückgängig machen 
 ## Issues
 - control drag öffnet context menu (soll es nicht tun)

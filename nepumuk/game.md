@@ -5,12 +5,16 @@
   import {Game} from "./game.js"
   var game = new Game()
   
-  game.pane
+  var result = <div>
+    {game.getInfoBox()}
+    {game.pane}
+  </div>
+  result
 </script>
-## Wer ist dran?
+
 
 <script>
-  game.getInfoBox()
+
 </script>
 ## Regeln!
 <ul>
