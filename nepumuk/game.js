@@ -37,7 +37,11 @@ export class Game {
   }
   
   loadGame() {
-    var gameInfo = JSON.parse(localStorage["nepomukReversiGame1"])
+    try {
+      var gameInfo = JSON.parse(localStorage["nepomukReversiGame1"])
+    } catch(e) {
+      // could not load
+    }
     if (!gameInfo || !gameInfo.fields) {
       lively.warn("could not load game")
       return
