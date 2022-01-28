@@ -40,7 +40,7 @@ function daysBetween(from, to) {
 
   // erst allte tage in ganzen jahren dazwischen
   for (var year=from.year + 1; year < to.year; year++){
-    var d= 365 // #TOOD Schaltjahr
+    var d= 365 // #TODO Schaltjahr
     days = days + d
   }
   
@@ -89,7 +89,10 @@ var pane = <table>
     
     <tr><td>2 Jahre </td> <td>{ daysBetween({day: 7, month: 6, year: 2007}, {day: 7, month: 8, year: 2009}) }</td> </tr>
 
-    <tr><td>Irgendwann</td> <td>{ daysBetween({day: 7, month: 6, year: 2007}, {day: 1, month: 10, year: 2018}) }</td> </tr>
+    <tr><td>Irgendwann</td> <td>{ daysBetween({day: 7, month: 6, year: 2007}, {day: 26, month: 1, year: 2022}) }</td> </tr>
+    
+    <tr><td>Stefan</td> <td>{ daysBetween({day: 20, month: 8, year: 1989}, {day: 26, month: 1, year: 2022}) }</td> </tr>
+    <tr><td>Jens</td> <td>{ daysBetween({day: 10, month: 6, year: 1981}, {day: 26, month: 1, year: 2022}) }</td></tr>
 
 
 </table>

@@ -6,17 +6,19 @@ export class Game {
     this.setupUI()
     this.setupFields()
     
-    
-    
     this.newGame()
-    
-    
     this.loadGame() // for development
+    
+    // AI artificial intelligence... KI künstliche Intelligenz
+    this.computer = "black" // simple AI 
+    
+    this.history = []
+    this.history2= []
+    
   }
   
-  saveGame() {
-    
-    var jsonFields = this.getFields().map(ea => {
+  getGameInfo() {
+     var jsonFields = this.getFields().map(ea => {
       return {x: ea.x, y: ea.y, color: this.fieldColor(ea) }
     })
 
@@ -26,14 +28,30 @@ export class Game {
       whitemoves: this.whitemoves,
       blackmoves: this.blackmoves,
       endlessGame: this.endlessGame,
+      computer: this.computer,
       fields: jsonFields
     }
-    
+    return gameInfo
+  }
+  
+  setGameInfo(gameInfo) {
+    for(let ea of gameInfo.fields) {
+      var field = this.getField(ea.x, ea.y)
+      this.setFieldColor(field, ea.color)
+    }
+    this.player = gameInfo.player
+    this.whitemoves= gameInfo.whitemoves
+    this.blackmoves= gameInfo.blackmoves
+    this.endlessGame= gameInfo.endlessGame
+  }
+  
+  
+  saveGame() {
+    var gameInfo = this.getGameInfo()
     
     localStorage["nepomukReversiGame1"] = JSON.stringify(gameInfo)
     
-    
-    lively.notify("saved", localStorage["nepomukReversiGame1"]  )
+    // lively.notify("saved", localStorage["nepomukReversiGame1"]  )
   }
   
   loadGame() {
@@ -47,19 +65,14 @@ export class Game {
       return
     }
     
-    for(let ea of gameInfo.fields) {
-      var field = this.getField(ea.x, ea.y)
-      this.setFieldColor(field, ea.color)
-    }
-    this.player = gameInfo.player
-    this.whitemoves= gameInfo.whitemoves
-    this.blackmoves= gameInfo.blackmoves
-    this.endlessGame= gameInfo.endlessGame
+    this.setGameInfo(gameInfo)
     
     this.updateInfoBox()
   }
   
   newGame() {
+    this.history = []
+    this.history2= []
     var fields = this.getFields()
     for(let field of fields) {
       this.setFieldColor(field, "gray")
@@ -67,14 +80,37 @@ export class Game {
     this.player= "white"  
     this.whitemoves = 32
     this.blackmoves = 32
-    this.endlessGame = false
+    this.endlessGame = true
     
+    this.updateInfoBox() 
+  }
+  
+  endlessMoves() {
+    if (this.endlessGame){
+      this.endlessGame = false
+    } else {
+      this.endlessGame = true
+    }  
     this.updateInfoBox()
   }
   
+  undo() {
+    var last = this.history.pop()
+    this.history2.push(this.getGameInfo())
+    if (last) {
+      this.setGameInfo(last)
+    }
+  }
+  
+  redo() {
+   var last = this.history2.pop()
+   this.history.push(this.getGameInfo())
+    if (last) {
+      this.setGameInfo(last)
+    }
+  }
   
   setupUI() {
-   
     this.board = <div class="board"
       style="position: relative; width: 490px; height: 490px; background-color: lightgray">
     </div>  
@@ -83,6 +119,9 @@ export class Game {
           <button click={() => this.loadGame()}>load</button>
           <button click={() => this.saveGame()}>save</button>
           <button click={() => this.newGame()}>new</button>
+          <button id="endless" click={() => this.endlessMoves()}>unlimited moves</button>
+          <button click={() => this.undo()}>undo</button>
+          <button click={() => this.redo()}>redo</button>
         </div>
         {this.board}
       </div>
@@ -103,7 +142,10 @@ export class Game {
         // field.textContent = "" + i + " / " + j
         
         field.addEventListener("click", evt => {
-             this.onFieldClick(field) 
+          var start = Date.now()
+          this.onFieldClick(field) 
+          var time = Date.now() - start
+          lively.notify("took " + time)
         })
         this.board.appendChild(field)
       }
@@ -262,7 +304,7 @@ export class Game {
   
   
   fieldsThatWouldTurnColor(color, a, b) {
-    // lively.notify("would turn " + color + " " + a  + " " + b)
+     //lively.notify("would turn " + color + " " + a  + " " + b)
     
     var fields = []
     
@@ -300,39 +342,74 @@ export class Game {
     return fields
   }
   
-  onFieldClick(field) {
+  
+  markField(field, color) {
+    if (this.marker) this.marker.remove()
+      this.marker = lively.showElement(field)
+      this.marker.innerHTML = ""
+      this.marker.style.border = "2px solid " + color
+      lively.moveBy(this.marker, lively.pt(-2,-1))
+  }
+  
+  
+  
+  isStartField(field) {
+    if ((field.x === 3 || field.x === 4) && (field.y === 3 || field.y === 4)) {
+      return true
+    } else {
+      return false
+    }
+  }
+  
+  isColoredField(field) {
+    return  field.style.backgroundColor == "black" || field.style.backgroundColor == "white"
+  }
+  
+  // #important
+  onFieldClick(field) {   
     if (!this.endlessGame && this.whitemoves <= 0 && this.blackmoves <= 0) {
       lively.notify("Game over")
+      this.markField(field, "red")
       return
     }
     
     
     // Nur in leere Felder legen   
-    if (field.style.backgroundColor == "black" || field.style.backgroundColor == "white") {
+    if (this.isColoredField(field)) {
+      this.markField(field, "red")
       return 
     }
-    
-    var a = field.x
-    var b = field.y
     
     var turnedFields = this.fieldsThatWouldTurnColor(this.player, field.x, field.y)
     if (turnedFields.length === 0) return;
     
     if (turnedFields.length == 1) {
-      if ((a === 3 || a === 4) && (b === 3 || b === 4)) {
+      if (this.isStartField(field)) {
         // mitte ist erlaubt
       } else {
+        this.markField(field, "red")
         return
       }
     }
     
-    
+    this.playMove(turnedFields) 
+  } 
+  
+  playMove(turnedFields) {
     for(let eaField of turnedFields) {
       this.setFieldColor(eaField, this.player)
     }
     
+    if (this.player === "black"){
+      this.blackmoves   = this.blackmoves   - 1
+    }
+    
+    if (this.player === "white"){
+      this.whitemoves   = this.whitemoves   - 1
+    }
     this.changePlayer()
-  } 
+    this.history.push(this.getGameInfo())
+  }
   
   
   
@@ -347,14 +424,7 @@ export class Game {
       return
     }
 
-  // TODO FIX moves left
-//     if (color === "black"){
-//       this.blackmoves   = this.blackmoves   - 1
-//     }
-    
-//     if (color === "white"){
-//       this.whitemoves   = this.whitemoves   - 1
-//     }
+ 
     
     
     this.player = color
@@ -376,10 +446,79 @@ export class Game {
     } else {
       this.setPlayer("black")
     } 
+    
+    if (this.player === this.computer) {
+      this.makeComputerMove()
+    }
+    
   }
-
+  
+  
+  
+  
+  /*
+   * Idee: Computer takes as much peaces as possible... 
+   */
+  async makeComputerMove() {
+    
+    var validMoves = []
+    
+    var allFields = this.getFields()
+        
+    var freeFields = allFields.filter(ea => !this.isColoredField(ea))
+    var freeStartingFields =  freeFields.filter(ea => this.isStartField(ea))
+    
+    if (freeStartingFields.length > 0) {
+      freeFields = freeStartingFields
+    }
+    
+    
+    for (let field of freeFields) {
+      let turnedFields = this.fieldsThatWouldTurnColor(this.player, field.x, field.y)
+      if (turnedFields.length > 1 ||  this.isStartField(field)) {
+        validMoves.push({color: this.player, field: field, turned: turnedFields})
+      }
+    }
+    
+    if (validMoves.length === 0) {
+      lively.notify("no moves for " + this.player)
+      this.changePlayer()
+      return
+    }    
+    
+    // var bestMove = validMoves[0] // the first ist the best :-)
+    
+    var bestMove = validMoves.sortBy(ea => ea.turned.length).last
+    
+    
+    
+    await lively.sleep(100)
+    
+    // for(let ea of bestMove.turned) {
+    //   lively.showElement(ea)
+    // }
+    
+    this.markField(bestMove.field)
+    
+    this.playMove(bestMove.turned) 
+    
+    // for (let move of validMoves) {
+    //   lively.showElement(move.field)
+    // }
+     
+  }
+  
+  
   updateInfoBox() {
     if (!this.infoBox) return 
+    
+    var  button = this.pane.querySelector("#endless")
+    if (this.endlessGame){
+      button.textContent = "limit moves" 
+    }
+    else {
+      button.textContent = "unlimit moves" 
+    } 
     
     this.infoBox.innerHTML = ""
     let indicator = <div style="width: 20px; height: 20px; border: 1px solid black"></div>

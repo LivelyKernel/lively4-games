@@ -23,12 +23,17 @@ Erster Text
 - [x] umdreh Regel 
 - [x] reversi spielen 
 - [x] fixen das außenliegender Ring nich benutzt werden kann.
-- [ ] undefined fehler bei auto turn
+- [x] undefined fehler bei auto turn
 - [x] save player moves current player
-- [ ] fix moves left 
-- [ ] button endless game 
+- [x] fix moves left 
+- [x] button endless moves game 
 - [ ] keiner kann mehr ziehen game over
 - [ ] game editor mode 
-- [ ] zug rückgängig machen 
+    - tip so wie endless game 
+    - mit if bedingungen schauen ob in editor mode 
+    - button für farbe 
+- [x] zug rückgängig machen undo redo  
+- [ ] Animationen 
+- [ ] simple KI
 ## Issues
 - control drag öffnet context menu (soll es nicht tun)
